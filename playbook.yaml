@@ -1,0 +1,36 @@
+- name: download docker
+  vars_files:
+    - vars/credentials
+  hosts: all
+  tasks:
+  - name: install packages (yum-utils)
+    yum:
+      name: yum-utils
+  - name: add docker engine repository
+    get_url: 
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docker.repo
+      mode: 0644
+  - name: download engine docker
+    yum:
+      name: docker-ce
+      state: present
+  - name: start and enable docerk service
+    service:
+      name: docker
+      enabled: yes
+      state: started
+  - name: install pip packages
+    pip:
+      name: docker
+      state: present
+  - name: docker login
+    docker_login: 
+      username: "{{ username }}"
+      password: "{{ password }}"     
+  - name: download image and start container
+    docker_container:
+      name: flask-hello
+      image: zettblater/flask-hello
+      ports:
+        - "5000:5000"
