@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    triggers { 
+      polSCM '* * * * *'
+        }
     stages {
         
         stage("TEST") {
