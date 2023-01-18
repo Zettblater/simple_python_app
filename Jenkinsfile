@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
       ANSIBLO_PRIVATE_KEY=credentials('ssh-key')
+    }
     triggers { 
       pollSCM '* * * * *'
         }
