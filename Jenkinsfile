@@ -33,7 +33,7 @@ pipeline {
         stage("DEPLOY") {
             steps {
                 echo "---Deploy---"
-                sh "ansible-playbook playbook.yaml -i inventory --private-key=$ANSIBLE_PRIVATE_KEY"            }
+                sh "ansible-playbook playbook.yaml -i inventory --private-key=$ANSIBLE_PRIVATE_KEY -u ansiblo"            }
         }
         
     }
