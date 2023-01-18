@@ -4,7 +4,13 @@ pipeline {
       pollSCM '* * * * *'
         }
     stages {
-        
+         stage("DEPLOY") {
+            steps {
+                echo "---Deploy---"
+                sh "ansible-playbook:"            }
+        }
+
+    }
         stage("TEST") {
             steps {
                 echo "---Build---"
@@ -24,8 +30,9 @@ pipeline {
         stage("DEPLOY") {
             steps {
                 echo "---Deploy---"
-                sh "docker run -d --name flask-app-$BUILD_ID -p 80$BUILD_ID:8080 zettblater/pipline:v$BUILD_ID"            }
+                sh "ansible-playbook playbook.yaml"            }
         }
+        
     }
      post {
      success { 

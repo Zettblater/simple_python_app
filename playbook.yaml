@@ -31,6 +31,6 @@
   - name: download image and start container
     docker_container:
       name: flask-hello
-      image: zettblater/flask-hello
+      image: zettblater/first-pipeline:v$BUILD_ID
       ports:
         - "5000:5000"
