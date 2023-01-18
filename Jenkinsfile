@@ -7,13 +7,8 @@ pipeline {
       pollSCM '* * * * *'
         }
     stages {
-         stage("DEPLOY") {
-            steps {
-                echo "---Deploy---"
-                sh "ansible-playbook:"            }
-        }
-
-    }
+         
+    
         stage("TEST") {
             steps {
                 echo "---Build---"
@@ -38,6 +33,7 @@ pipeline {
         }
         
     }
+}
      post {
      success { 
         withCredentials([string(credentialsId: 'botSecret', variable: 'TOKEN'), string(credentialsId: 'chatId', variable: 'CHAT_ID')]) {
