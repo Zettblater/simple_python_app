@@ -1,6 +1,4 @@
 - name: download docker
-  vars_files:
-    - vars/credentials
   hosts: all
   tasks:
   - name: install packages (yum-utils)
@@ -33,4 +31,4 @@
       name: flask-hello{{ BUILD_ID }}
       image: zettblater/pipeline:v{{ BUILD_ID }}
       ports:
-        - "5000:8080"
+        - "5001:8080"
