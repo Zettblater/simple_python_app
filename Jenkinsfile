@@ -21,9 +21,10 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 's', passwordVariable: 'password', usernameVariable: 'username')]) {
                 sh "docker login -u $username -p $password"
                 sh "docker push zettblater/pipline:v$BUILD_ID"
-}
+
           
             }
+        }
         }
         stage("DEPLOY") {
             steps {  withCredentials([usernamePassword(credentialsId: 's', passwordVariable: 'password', usernameVariable: 'username')]) {
@@ -33,7 +34,7 @@ pipeline {
         }
         
     }
-}
+
      post {
      success { 
         withCredentials([string(credentialsId: 'botSecret', variable: 'TOKEN'), string(credentialsId: 'chatId', variable: 'CHAT_ID')]) {
@@ -59,5 +60,9 @@ pipeline {
         }
      }
 
- }
+     }
+    
 }
+
+     
+
