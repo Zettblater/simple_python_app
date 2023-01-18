@@ -31,9 +31,10 @@ pipeline {
             }
         }
         stage("DEPLOY") {
-            steps {
+            steps {  withCredentials([usernamePassword(credentialsId: 's', passwordVariable: 'password', usernameVariable: 'username')]) {
                 echo "---Deploy---"
-                sh "ansible-playbook playbook.yaml -i inventory --private-key=$ANSIBLE_PRIVATE_KEY -u ansiblo"            }
+                sh "ansible-playbook playbook.yaml -i inventory --private-key=$ANSIBLE_PRIVATE_KEY -u ansiblo --become -e username=$username -e password=$password -e BUILD_ID=$BUILD_ID"} 
+                  }
         }
         
     }
